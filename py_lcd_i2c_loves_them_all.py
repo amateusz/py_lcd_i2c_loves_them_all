@@ -176,7 +176,13 @@ class lcd:
     # define precise positioning (addition from the forum)
     def display_exact(self, string, line, pos):  # main printing function
         '''print string. line and pos are indexed[0]'''
-        if line > self.dimensions[1] - 1: return
+        if line > self.dimensions[1] - 1 or pos > self.dimensions[0] - 1: return
+
+        if len(string) + pos > self.dimensions[0]:
+            # string = string[:len(self)]
+            string, rest = string[:self.dimensions[0] - pos], string[self.dimensions[0] - pos:]
+            self.display(rest,
+                         line + 1)  # recursive thing =^.^=  it displays lines in reverse order, but it doesn't matter as long as everything works and they don't overlap
 
         if line == 0:
             pos_new = pos
@@ -187,12 +193,6 @@ class lcd:
         elif line == 3:
             pos_new = 4 * 16 + self.dimensions[0] + pos
 
-        if len(string) > self.dimensions[0]:
-            # string = string[:len(self)]
-            string, rest = string[:self.dimensions[0]], string[self.dimensions[0]:]
-            self.display(rest,
-                         line + 1)  # recursive thing =^.^=  it displays lines in reverse order, but it doesn't matter as long as everything works and they don't overlap
-
         self.write(0x80 + pos_new)
 
         for char in string:
@@ -200,3 +200,10 @@ class lcd:
 
     def __len__(self):
         return self.dimensions[0] * self.dimensions[1]
+
+    def __setitem__(self, key, value):
+        assert key < self.__len__()
+        # transform linear lenght data info x,y on array
+        line, pos = divmod(key, self.dimensions[0])
+
+        self.display_exact(value, line, pos)

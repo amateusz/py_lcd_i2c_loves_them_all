@@ -1,8 +1,9 @@
-import py_lcd_i2c_loves_them_all
-from time import sleep
+import keyword
 import random
 import string
-import keyword
+from time import sleep
+
+import py_lcd_i2c_loves_them_all
 
 try:
     dimensions = (16, 4)

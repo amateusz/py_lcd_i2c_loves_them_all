@@ -3,11 +3,11 @@ import random
 import string
 from time import sleep
 
-import py_lcd_i2c_loves_them_all
+import py_lcd_i2c_loves_them_all.py_lcd_loves as py_loves_lcd
 
 try:
     dimensions = (16, 4)
-    display = py_lcd_i2c_loves_them_all.lcd(0x21, dimensions)
+    display = py_loves_lcd.LCD(0x21, dimensions)
 
     for i in range(8):
         display.display_exact(random.choice(keyword.kwlist), random.randrange(dimensions[1]),

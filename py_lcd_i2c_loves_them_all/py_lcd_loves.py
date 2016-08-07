@@ -106,7 +106,7 @@ Rw = 0b00000010  # Read/Write bit
 Rs = 0b00000001  # Register select bit
 
 
-class lcd:
+class LCD:
     # initializes objects and lcd
     def __init__(self, address=ADDRESS, dimensions=DIMENSIONS, port=1):
         try:

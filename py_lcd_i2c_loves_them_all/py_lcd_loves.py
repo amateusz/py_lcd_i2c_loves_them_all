@@ -124,7 +124,7 @@ class LCD:
             self.write(LCD_ENTRYMODESET | LCD_ENTRYLEFT)
             sleep(0.2)
         except IOError:
-            print 'cannot access i2c device @ ' + hex(address)
+            print ('cannot access i2c device @ ' + hex(address))
             raise
 
     # clocks EN to latch command
@@ -175,6 +175,7 @@ class LCD:
 
     # define precise positioning (addition from the forum)
     def display_exact(self, string, line, pos):  # main printing function
+        string = str(string)
         '''print string. line and pos are indexed[0]'''
         if line > self.dimensions[1] - 1 or pos > self.dimensions[0] - 1: return
 

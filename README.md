@@ -7,3 +7,6 @@ I have added few higher-level features such as line wraping, setting array-like 
 Be certain to pass dimension of your display as a tuple in instance initialization.
 
 Quick glances and bug reports are welcome.
+
+
+Supirsingly `sudo python3 setup.py install` works !
